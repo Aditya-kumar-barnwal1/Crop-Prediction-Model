@@ -8,22 +8,28 @@ import os
 
 app = Flask(__name__)
 
-# This allows your Vite React app (usually running on localhost:5173) to talk to Flask
-# In app.py
-CORS(app, resources={r"/*": {"origins": "*"}}) # Allows all during initial deploy
+# Allows your Vercel frontend to bypass the "blocked by CORS policy" error
+CORS(app, resources={r"/*": {"origins": "*"}}) 
 
-# 1. Load your Random Forest pipeline and Metrics
+# --- BULLETPROOF PATH LOGIC ---
+# This finds the exact folder where app.py is currently sitting
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 model = None
 model_metrics = {"accuracy": "N/A", "mae": "N/A"}
 
 try:
+    # Safely join the paths so Render finds the files
+    model_path = os.path.join(BASE_DIR, 'model', 'crop_yield_model.pkl')
+    metrics_path = os.path.join(BASE_DIR, 'model', 'metrics.json')
+
     # Load the trained model
-    model = joblib.load('model/crop_yield_model.pkl')
-    print("✅ Model loaded successfully!")
+    model = joblib.load(model_path)
+    print(f"✅ Model loaded successfully from {model_path}!")
     
-    # Load the metrics (Accuracy and MAE) generated during training
-    if os.path.exists('model/metrics.json'):
-        with open('model/metrics.json', 'r') as f:
+    # Load the metrics generated during training
+    if os.path.exists(metrics_path):
+        with open(metrics_path, 'r') as f:
             model_metrics = json.load(f)
         print(f"✅ Metrics loaded: Accuracy {model_metrics['accuracy']}%")
     else:

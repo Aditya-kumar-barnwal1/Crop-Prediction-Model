@@ -52,7 +52,8 @@ preprocessor = ColumnTransformer(
 print("🧠 Training Random Forest... (this might take a minute)")
 model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('regressor', RandomForestRegressor(n_estimators=100, random_state=42))
+    # Change your regressor line to this:
+    ('regressor', RandomForestRegressor(n_estimators=50, max_depth=20, random_state=42))
 ])
 
 model.fit(X_train, y_train)
@@ -72,7 +73,8 @@ print(f"📏 Mean Absolute Error: {metrics['mae']} hg/ha")
 
 # 7. Save Model and Metrics
 os.makedirs('model', exist_ok=True)
-joblib.dump(model, 'model/crop_yield_model.pkl')
+# Change your dump line to this:
+joblib.dump(model, 'model/crop_yield_model.pkl', compress=3)
 
 with open('model/metrics.json', 'w') as f:
     json.dump(metrics, f)
