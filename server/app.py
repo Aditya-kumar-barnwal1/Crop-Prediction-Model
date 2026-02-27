@@ -68,5 +68,7 @@ def predict():
         return jsonify({'error': str(e)}), 400
 
 if __name__ == '__main__':
-    # Starts the server on http://localhost:5000
-    app.run(debug=True, port=5000)
+    # Get port from environment or default to 5000 for local dev
+    port = int(os.environ.get("PORT", 5000))
+    # Must use 0.0.0.0 to be accessible externally
+    app.run(host='0.0.0.0', port=port)

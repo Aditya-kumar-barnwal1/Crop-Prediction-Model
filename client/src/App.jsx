@@ -92,7 +92,7 @@ function App() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://crop-prediction-model-tfyr.onrender.com', {
+      const response = await fetch('https://crop-prediction-model-tfyr.onrender.com/predict', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
