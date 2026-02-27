@@ -9,7 +9,8 @@ import os
 app = Flask(__name__)
 
 # This allows your Vite React app (usually running on localhost:5173) to talk to Flask
-CORS(app)
+# In app.py
+CORS(app, resources={r"/*": {"origins": "*"}}) # Allows all during initial deploy
 
 # 1. Load your Random Forest pipeline and Metrics
 model = None
