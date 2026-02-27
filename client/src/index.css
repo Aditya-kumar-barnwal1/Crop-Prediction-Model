@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@theme {
+  --color-agri-light: #f0fdf4;
+  --color-agri: #16a34a;
+  --color-agri-dark: #14532d;
+}
+
+body {
+  background-color: var(--color-agri-light);
+  color: var(--color-agri-dark);
+  font-family: system-ui, -apple-system, sans-serif;
+}

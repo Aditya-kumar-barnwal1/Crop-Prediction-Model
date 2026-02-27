@@ -1,0 +1,33 @@
+# =========================
+# Node (Frontend)
+# =========================
+node_modules/
+client/node_modules/
+dist/
+client/dist/
+
+# =========================
+# Python (Backend)
+# =========================
+venv/
+server/venv/
+__pycache__/
+*.pyc
+
+# =========================
+# ML Model Files
+# =========================
+*.pkl
+*.joblib
+
+# =========================
+# Environment Files
+# =========================
+.env
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
